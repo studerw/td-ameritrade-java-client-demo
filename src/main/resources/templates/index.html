@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<title>TDA Demo</title>
+	<link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.css" crossorigin="anonymous">
+
+	<style>
+		.classif-u {
+			background-color: #2C9828;
+			color: #FFF;
+			text-align: center;
+			padding: 2px 0;
+			font-size: 10pt;
+			/*display: block;*/
+		}
+
+		.classif-u span {
+			margin: auto;
+		}
+
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+
+		/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background: rgba(255, 255, 255, .8) url('ajax-loader.gif') 50% 50% no-repeat;
+		}
+
+		/* When the body has the loading class, we turn
+		   the scrollbar off with overflow:hidden */
+		body.loading .modal {
+			overflow: hidden;
+		}
+
+		/* Anytime the body has the loading class, our
+		   modal element will be visible */
+		body.loading .modal {
+			display: block;
+		}
+	</style>
+	<!-- Custom styles for this template -->
+	<style>
+		/* Move down content because we have a fixed navbar that is 3.5rem tall */
+		body {
+			padding-top: 3.5rem;
+		}
+	</style>
+</head>
+<body>
+<div class="fixed-top" data-toggle="affix">
+	<nav class="navbar classif-u">
+		<span class="classif-u">UNCLASSIFIED//FOUO</span>
+	</nav>
+
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">TDA Demo</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+				aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="alfresco-dropdown" data-toggle="dropdown"
+					   aria-haspopup="true"
+					   aria-expanded="false">PriceHistory</a>
+					<div class="dropdown-menu" aria-labelledby="alfresco-dropdown">
+						<a class="dropdown-item" href="/api/tda/hello">hello</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="cmis-dropdown" data-toggle="dropdown"
+					   aria-haspopup="true"
+					   aria-expanded="false">Market</a>
+					<div class="dropdown-menu" aria-labelledby="cmis-dropdown">
+						<a class="dropdown-item" href="/api/cmis/foobar/stats">Stats</a>
+						<a class="dropdown-item" href="/api/cmis/foobar/tree?depth=-1"> Folder</a>
+						<a class="dropdown-item" href="/api/cmis/foobar/documents">All Docs</a>
+						<a class="dropdown-item disabled" href="/api/cmis/cmis-dto">DTO</a>
+						<a class="dropdown-item disabled" href="/api/cmis/"/>Object</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="props" data-toggle="dropdown" aria-haspopup="true"
+					   aria-expanded="false">Mappings </a>
+					<div class="dropdown-menu" aria-labelledby="props">
+						<a class="dropdown-item" href="/api/cmis/unique-props?path=foobar">Unique Properties</a>
+						<!--						<a class="dropdown-item" href="/api/cmis/mapped-props/product">Product</a>-->
+						<!--						<a class="dropdown-item" href="/api/cmis/mapped-props/odrive"/>Object Drive</a>-->
+						<a class="dropdown-item" href="/api/cmis/mapped-props">All Mapped Props</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="migrations" data-toggle="dropdown"
+					   aria-haspopup="true"
+					   aria-expanded="false">Migrations</a>
+					<div class="dropdown-menu" aria-labelledby="migrations">
+						<a class="dropdown-item" href="/api/migrations/">All Migrations</a>
+						<a class="dropdown-item" href="/api/migrations/todo?path=foobar">Docs Needing Migration</a>
+					</div>
+				</li>
+			</ul>
+			<!--		-->
+			<!--		<form class="form-inline my-2 my-lg-0">-->
+			<!--			<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+			<!--			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+			<!--		</form>-->
+		</div>
+	</nav>
+</div>
+
+<main role="main">
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-4">TDA Demo</h1>
+			<p>This application is a demo of the <a href="https://github.com/studerw/td-ameritrade-client">TDA Java
+				Client</a>.</p>
+			<p><a class="btn btn-primary btn-lg"
+				  href="http://td-ameritrade-client.studerw.com.s3-website-us-east-1.amazonaws.com/" role="button">Javdocs&raquo;</a>
+			</p>
+		</div>
+	</div>
+
+	<div id="cntr" class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+				<h2>CMIS API</h2>
+				<p>This connects to the repository using the CMIS API and lists the documents and folders contained
+					under the configured foobar <em>root path</em>.</p>
+				<p><a class="btn btn-secondary" href="/api/cmis/foobar/tree?depth=-1" role="button">List All Docs
+					&raquo;</a></p>
+			</div>
+			<div class="col-md-4">
+				<h2>Mappings</h2>
+				<p>This provides information on the unique properties and their counts seen on documents within the
+					repository and how
+					they are currently configured in the application. </p>
+				<p><a class="btn btn-secondary" href="/api/cmis/unique-props?path=foobar" role="button">View All
+					Props &raquo;</a></p>
+			</div>
+
+			<div class="col-md-4">
+				<h2>Migrations</h2>
+				<p>Provides information on documents that have been migrated and also new documents which can be
+					migrated
+				</p>
+				<p>
+					<button id="purgeBtn" class="btn btn-warning">Purge Migrations &raquo;</button>
+				</p>
+				<p>
+					<button id="doBtn" class="btn btn-primary">Do Migrations &raquo;</button>
+				</p>
+			</div>
+		</div>
+
+		<hr>
+
+	</div> <!-- /container -->
+
+</main>
+<nav class="navbar fixed-bottom classif-u">
+	<span class="classif-u">UNCLASSIFIED//FOUO</span>
+</nav>
+
+<footer class="container">
+	<p>&copy; William Studer 2019</p>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        console.log("doc ready...");
+
+        $body = $("body");
+        $(document).on({
+            ajaxStart: function () {
+                $body.addClass("loading");
+            },
+            ajaxStop: function () {
+                $body.removeClass("loading");
+            }
+        });
+    });
+
+    $('#purgeBtn').click(function (el) {
+        el.preventDefault();
+        $.ajax
+        ({
+            type: "POST",
+            url: "/api/migrations/actions/purge",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+
+    $('#doBtn').click(function (el) {
+        el.preventDefault();
+        $.ajax
+        ({
+            type: "POST",
+            url: "/api/migrations/actions/do?path=foo",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+
+
+</script>
+<div class="modal"><!-- Place at bottom of page --></div>
+</body>
+</html>

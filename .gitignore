@@ -1,0 +1,33 @@
+# Maven
+target/
+pom.xml.tag
+release.properties
+src/main/resources/public/*.json
+src/main/resources/public/docs.html
+
+# JetBrains IDES
+*.iml
+.idea/
+out/
+
+Eclipse IDE
+*.project
+*.classpath
+*.cache
+*.settings
+.metadata/
+
+# Vim
+*.swp
+tags
+TAGS
+
+# OS X
+*.DS_Store
+
+# Logs
+*.log
+logs/
+*~
+/src/main/resources/application.properties
+/src/main/resources/application-default.properties
