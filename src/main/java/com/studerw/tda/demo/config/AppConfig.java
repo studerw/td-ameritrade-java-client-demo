@@ -15,6 +15,7 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class AppConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);
+
 	private Environment env;
 
 	@Bean
@@ -38,17 +39,4 @@ public class AppConfig {
 		this.env = environment;
 	}
 }
-
-
-// 	@Bean
-// 	public UserDetailsService userDetailsService() {
-// 		return new UserDetailsService() {
-// 			@Override
-// 			public UserDetails loadUserByUsername(String username) {
-// 				return new User(username, "",
-// 					AuthorityUtils
-// 						.commaSeparatedStringToAuthorityList("ROLE_USER"));
-// 			}
-// 		};
-// 	}
 

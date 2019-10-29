@@ -1,4 +1,4 @@
-//package com.studerw.tda.demo.mvc;
+//package com.studerw.tda.demo.config;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;

@@ -2,7 +2,6 @@ package com.studerw.tda.demo.tda;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import com.studerw.tda.client.TdaClient;
 import com.studerw.tda.model.history.PriceHistory;
@@ -37,15 +36,15 @@ public class TdaController {
 
 	@GetMapping("/hello")
 	public ResponseEntity<String> getHello(Principal principal) {
-		LOGGER.info("[{}] - get getHello", "hello");//principal.getName());
-		return ResponseEntity.of(Optional.of("Hello"));
+		LOGGER.info("[{}] - get getHello", principal.getName());
+		return ResponseEntity.ok("Hello");
 	}
 
 	@GetMapping("/quotes")
 	public ResponseEntity<List<Quote>> fetchQuotes(
 		@RequestParam List<String> symbols,
 		Principal principal) {
-		LOGGER.info("[{}] - getQuotes, symbols={}", "user", symbols);
+		LOGGER.info("[{}] - getQuotes, symbols={}", principal.getName(), symbols);
 		if (symbols == null || symbols.isEmpty()) {
 			throw new IllegalArgumentException("Must have at least one symbol parameter");
 		}
@@ -59,7 +58,7 @@ public class TdaController {
 	public ResponseEntity<PriceHistory> getPriceHistory(
 		@RequestParam String symbol,
 		Principal principal) {
-		LOGGER.info("[{}] - priceHistory, symbol={}", "user", symbol);
+		LOGGER.info("[{}] - priceHistory, symbol={}", principal.getName(), symbol);
 		if (StringUtils.isBlank(symbol)) {
 			throw new IllegalArgumentException("Symbol parameter cannot be empty.");
 		}

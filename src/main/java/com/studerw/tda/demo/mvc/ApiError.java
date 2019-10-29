@@ -1,6 +1,8 @@
 package com.studerw.tda.demo.mvc;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -16,17 +18,51 @@ public class ApiError {
 
 	private List<String> errors;
 
+	private ZonedDateTime zonedDateTime;
+
 	public ApiError(HttpStatus status, String message, List<String> errors) {
-		super();
 		this.status = status;
 		this.message = message;
 		this.errors = errors;
+		this.zonedDateTime = ZonedDateTime.now();
 	}
 
 	public ApiError(HttpStatus status, String message, String error) {
-		super();
 		this.status = status;
 		this.message = message;
-		errors = Arrays.asList(error);
+		this.errors = Collections.singletonList(error);
+		this.zonedDateTime = ZonedDateTime.now();
+	}
+
+	public HttpStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public List<String> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
+	}
+
+	public ZonedDateTime getZonedDateTime() {
+		return zonedDateTime;
+	}
+
+	public void setZonedDateTime(ZonedDateTime zonedDateTime) {
+		this.zonedDateTime = zonedDateTime;
 	}
 }

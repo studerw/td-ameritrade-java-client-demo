@@ -15,10 +15,18 @@
 	<files>
 		<file>
 			<source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
-			<outputDirectory></outputDirectory>
+			<outputDirectory/>
 		</file>
 		<file>
 			<source>${project.basedir}/src/main/assembly/zip/config/application.properties</source>
+			<outputDirectory>config</outputDirectory>
+		</file>
+		<file>
+			<source>${project.basedir}/x509/tda-demo-truststore.jks</source>
+			<outputDirectory>config</outputDirectory>
+		</file>
+		<file>
+			<source>${project.basedir}/x509/tda-demo-server.jks</source>
 			<outputDirectory>config</outputDirectory>
 		</file>
 	</files>

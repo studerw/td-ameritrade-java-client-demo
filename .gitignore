@@ -31,3 +31,4 @@ logs/
 *~
 /src/main/resources/application.properties
 /src/main/resources/application-default.properties
+/tda-demo.log.*
