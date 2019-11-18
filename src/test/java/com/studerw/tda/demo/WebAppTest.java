@@ -17,20 +17,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TestConfig.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@SpringBootTest(classes = WebApp.class, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@ActiveProfiles("test")
 public class WebAppTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebApp.class);
 
-//	@Autowired private TestRestTemplate testRestTemplate;
 	@Autowired private Environment environment;
 	@Autowired TdaClient tdaClient;
 
 	@Test
 	public void testConfig() {
-//		assertThat(testRestTemplate).isNotNull();
 		assertThat(environment).isNotNull();
 		LOGGER.debug("testConfig...");
 	}

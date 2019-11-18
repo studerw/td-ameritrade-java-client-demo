@@ -32,6 +32,7 @@
 		<slf4j.version>1.7.26</slf4j.version>
 		<version.logback>1.2.3</version.logback>
 		<version.jackson>2.9.10</version.jackson>
+		<version.restdocs>2.0.4.RELEASE</version.restdocs>
 
 	</properties>
 
@@ -40,7 +41,7 @@
 		<dependency>
 			<groupId>com.studerw.tda</groupId>
 			<artifactId>td-ameritrade-client</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 		<!-- Spring -->
 		<dependency>
@@ -59,6 +60,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -154,6 +160,22 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-core</artifactId>
+			<version>${version.restdocs}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<version>${version.restdocs}</version>
 			<scope>test</scope>
 		</dependency>
 

@@ -1,4 +1,4 @@
-package com.studerw.tda.demo.mvc;
+package com.studerw.tda.demo.user;
 
 import java.security.Principal;
 import java.util.Collection;
