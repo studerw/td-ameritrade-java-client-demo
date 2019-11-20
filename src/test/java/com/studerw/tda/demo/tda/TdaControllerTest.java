@@ -20,7 +20,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnQuotes() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/quotes")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/quotes")
 			.accept(MediaType.APPLICATION_JSON)
 			.param("symbols", "msft", "vtsax", "s", "f"))
 			.andExpect(status().isOk())
@@ -33,7 +33,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnPriceHistory() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/priceHistory")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/priceHistory")
 			.accept(MediaType.APPLICATION_JSON)
 			.param("symbol", "msft"))
 			.andExpect(status().isOk())
@@ -46,7 +46,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnAccountsNoPositions() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/accounts")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/accounts")
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.[*].positions").doesNotExist())
@@ -59,7 +59,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnAccountsWithPositions() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/accounts")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/accounts")
 			.accept(MediaType.APPLICATION_JSON)
 			.param("positions", "true"))
 			.andExpect(status().isOk())
@@ -73,7 +73,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnInstruments() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/instruments")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/instruments")
 			.param("searchStr", "m.*")
 			.param("queryType", Query.QueryType.SYMBOL_REGEX.name())
 			.accept(MediaType.APPLICATION_JSON))
@@ -92,7 +92,7 @@ public class TdaControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnFundamentals() throws Exception {
-		final MvcResult mvcResult = this.mockMvc.perform(get("/api/v1/tda/fundamentals")
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/fundamentals")
 			.param("symbol", "msft")
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())

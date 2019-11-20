@@ -74,56 +74,29 @@
 </head>
 <body>
 <div class="fixed-top" data-toggle="affix">
-	<nav class="navbar classif-u">
-		<span class="classif-u">UNCLASSIFIED//FOUO</span>
-	</nav>
+<!--	<nav class="navbar classif-u">-->
+<!--		<span class="classif-u">UNCLASSIFIED//FOUO</span>-->
+<!--	</nav>-->
 
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">TDA Demo</a>
+		<a class="navbar-brand" href="">TD Ameritrade Client Demo</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
 				aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<div class="collapse navbar-collapse" id="navbarsDefault">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="alfresco-dropdown" data-toggle="dropdown"
-					   aria-haspopup="true"
-					   aria-expanded="false">PriceHistory</a>
-					<div class="dropdown-menu" aria-labelledby="alfresco-dropdown">
-						<a class="dropdown-item" href="/api/tda/hello">hello</a>
-					</div>
+				<li class="nav-item">
+					<a class="nav-link" href="/actuator">Spring Actuator <span class="sr-only">Actuator</span></a>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="cmis-dropdown" data-toggle="dropdown"
+				<li class="nav-item dropdown active">
+					<a class="nav-link dropdown-toggle" href="#" id="docsNavLink" data-toggle="dropdown"
 					   aria-haspopup="true"
-					   aria-expanded="false">Market</a>
-					<div class="dropdown-menu" aria-labelledby="cmis-dropdown">
-						<a class="dropdown-item" href="/api/cmis/foobar/stats">Stats</a>
-						<a class="dropdown-item" href="/api/cmis/foobar/tree?depth=-1"> Folder</a>
-						<a class="dropdown-item" href="/api/cmis/foobar/documents">All Docs</a>
-						<a class="dropdown-item disabled" href="/api/cmis/cmis-dto">DTO</a>
-						<a class="dropdown-item disabled" href="/api/cmis/"/>Object</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="props" data-toggle="dropdown" aria-haspopup="true"
-					   aria-expanded="false">Mappings </a>
-					<div class="dropdown-menu" aria-labelledby="props">
-						<a class="dropdown-item" href="/api/cmis/unique-props?path=foobar">Unique Properties</a>
-						<!--						<a class="dropdown-item" href="/api/cmis/mapped-props/product">Product</a>-->
-						<!--						<a class="dropdown-item" href="/api/cmis/mapped-props/odrive"/>Object Drive</a>-->
-						<a class="dropdown-item" href="/api/cmis/mapped-props">All Mapped Props</a>
-					</div>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="migrations" data-toggle="dropdown"
-					   aria-haspopup="true"
-					   aria-expanded="false">Migrations</a>
-					<div class="dropdown-menu" aria-labelledby="migrations">
-						<a class="dropdown-item" href="/api/migrations/">All Migrations</a>
-						<a class="dropdown-item" href="/api/migrations/todo?path=foobar">Docs Needing Migration</a>
+					   aria-expanded="false">Docs</a>
+					<div class="dropdown-menu" aria-labelledby="swaggerUi-dropdown">
+						<a class="dropdown-item" href="/swagger-ui.html">Rest API</a>
+						<a class="dropdown-item" href="/v2/api-docs">Swagger JSON</a>
 					</div>
 				</li>
 			</ul>
@@ -154,32 +127,8 @@
 		<!-- Example row of columns -->
 		<div class="row">
 			<div class="col-md-4">
-				<h2>CMIS API</h2>
-				<p>This connects to the repository using the CMIS API and lists the documents and folders contained
-					under the configured foobar <em>root path</em>.</p>
-				<p><a class="btn btn-secondary" href="/api/cmis/foobar/tree?depth=-1" role="button">List All Docs
-					&raquo;</a></p>
-			</div>
-			<div class="col-md-4">
-				<h2>Mappings</h2>
-				<p>This provides information on the unique properties and their counts seen on documents within the
-					repository and how
-					they are currently configured in the application. </p>
-				<p><a class="btn btn-secondary" href="/api/cmis/unique-props?path=foobar" role="button">View All
-					Props &raquo;</a></p>
-			</div>
-
-			<div class="col-md-4">
-				<h2>Migrations</h2>
-				<p>Provides information on documents that have been migrated and also new documents which can be
-					migrated
-				</p>
-				<p>
-					<button id="purgeBtn" class="btn btn-warning">Purge Migrations &raquo;</button>
-				</p>
-				<p>
-					<button id="doBtn" class="btn btn-primary">Do Migrations &raquo;</button>
-				</p>
+				<h2>TDA API</h2>
+				<p>This connects to the repository using the  TD Ameritrade Client</p>
 			</div>
 		</div>
 
@@ -188,9 +137,9 @@
 	</div> <!-- /container -->
 
 </main>
-<nav class="navbar fixed-bottom classif-u">
-	<span class="classif-u">UNCLASSIFIED//FOUO</span>
-</nav>
+<!--<nav class="navbar fixed-bottom classif-u">-->
+<!--	<span class="classif-u">UNCLASSIFIED//FOUO</span>-->
+<!--</nav>-->
 
 <footer class="container">
 	<p>&copy; William Studer 2019</p>

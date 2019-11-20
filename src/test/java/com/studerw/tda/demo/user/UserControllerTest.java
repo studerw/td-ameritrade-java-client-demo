@@ -16,7 +16,7 @@ public class UserControllerTest extends ControllerTest {
 
 	@Test
 	public void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get("/api/v1/user/whoami"))
+		this.mockMvc.perform(get(this.apiPrefix+"/user/whoami"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.username", equalTo("tda-client-test")));
 	}

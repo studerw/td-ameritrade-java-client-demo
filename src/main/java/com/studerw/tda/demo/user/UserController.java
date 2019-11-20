@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studerw.tda.client.TdaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import springfox.documentation.annotations.ApiIgnore;
 
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,25 +20,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("${api.prefix}/user")
 public class UserController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	private final Environment environment;
-
-	private final TdaClient tdaClient;
-
 	private final ObjectMapper objectMapper;
 
-	public UserController(Environment environment, TdaClient tdaClient, ObjectMapper objectMapper) {
+	public UserController(Environment environment, ObjectMapper objectMapper) {
 		this.environment = environment;
-		this.tdaClient = tdaClient;
 		this.objectMapper = objectMapper;
 	}
 
 
-	@GetMapping("/whoami")
-	public ResponseEntity<UserPojo> whoami(Principal principal) {
+	@GetMapping(value = "/whoami", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UserPojo> whoami(@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - whoami", principal.getName());
 		UserPojo userPojo = new UserPojo(SecurityContextHolder.getContext().getAuthentication());
 		return ResponseEntity.ok(userPojo);
@@ -45,6 +43,7 @@ public class UserController {
 
 	private static class UserPojo {
 		private String username;
+
 		private Collection<? extends GrantedAuthority> authorities;
 
 		public UserPojo(Authentication authentication) {

@@ -13,6 +13,7 @@ import com.studerw.tda.model.quote.Quote;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import springfox.documentation.annotations.ApiIgnore;
 
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/tda")
+@RequestMapping("${api.prefix}/tda")
 public class TdaController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TdaController.class);
 
@@ -37,17 +38,16 @@ public class TdaController {
 		this.tdaClient = tdaClient;
 	}
 
-
-	@GetMapping("/hello")
-	public ResponseEntity<String> getHello(Principal principal) {
-		LOGGER.info("[{}] - get getHello", principal.getName());
-		return ResponseEntity.ok("Hello");
+	@GetMapping(value = "/ping", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> ping(@ApiIgnore Principal principal) {
+		LOGGER.info("[{}] - ping", principal.getName());
+		return ResponseEntity.ok("pong");
 	}
 
-	@GetMapping("/quotes")
+	@GetMapping(value = "/quotes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Quote>> fetchQuotes(
 		@RequestParam List<String> symbols,
-		Principal principal) {
+		@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - getQuotes, symbols={}", principal.getName(), symbols);
 		if (symbols == null || symbols.isEmpty()) {
 			throw new IllegalArgumentException("Must have at least one symbol parameter");
@@ -58,10 +58,10 @@ public class TdaController {
 			body(quotes);
 	}
 
-	@GetMapping("/priceHistory")
+	@GetMapping(value="/priceHistory", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PriceHistory> getPriceHistory(
 		@RequestParam String symbol,
-		Principal principal) {
+		@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - priceHistory, symbol={}", principal.getName(), symbol);
 		if (StringUtils.isBlank(symbol)) {
 			throw new IllegalArgumentException("Symbol parameter cannot be empty.");
@@ -72,11 +72,11 @@ public class TdaController {
 			body(priceHistory);
 	}
 
-	@GetMapping("/accounts")
+	@GetMapping(value="/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<SecuritiesAccount>> getAccounts(
 		@RequestParam(defaultValue = "false") boolean positions,
 		@RequestParam(defaultValue = "false") boolean orders,
-		Principal principal) {
+		@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - accounts, positions={}, orders={}",
 			principal.getName(), positions, orders);
 
@@ -86,8 +86,10 @@ public class TdaController {
 			body(accounts);
 	}
 
-	@GetMapping("/instruments")
-	public ResponseEntity<List<Instrument>> searchInstruments(Query query, Principal principal) {
+	@GetMapping(value="/instruments", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Instrument>> searchInstruments(
+		Query query,
+		@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - query instruments: {}", principal.getName(), query);
 
 		final List<Instrument> instruments = this.tdaClient.queryInstruments(query);
@@ -96,10 +98,10 @@ public class TdaController {
 			body(instruments);
 	}
 
-	@GetMapping("/fundamentals")
+	@GetMapping(value="/fundamentals", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FullInstrument> fundamentals(
 		@RequestParam String symbol,
-		Principal principal) {
+		@ApiIgnore Principal principal) {
 		LOGGER.info("[{}] - instrument fundamentals: {}", principal.getName(), symbol);
 
 		final FullInstrument fundamentalData = this.tdaClient.getFundamentalData(symbol);
@@ -107,5 +109,4 @@ public class TdaController {
 			contentType(MediaType.APPLICATION_JSON).
 			body(fundamentalData);
 	}
-
 }

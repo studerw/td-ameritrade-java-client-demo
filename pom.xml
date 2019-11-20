@@ -5,10 +5,25 @@
 				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<properties>
+		<start-class>com.studerw.tda.demo.WebApp</start-class>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>1.8</java.version>
+		<skipTests>false</skipTests>
+		<skipITs>false</skipITs>
+		<version.tda-client>2.0.0-SNAPSHOT</version.tda-client>
+		<version.slf4j>1.7.26</version.slf4j>
+		<version.springfox>2.9.2</version.springfox>
+		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+	</properties>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.0.RELEASE</version>
+		<version>2.2.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -20,21 +35,6 @@
 	<name>td-ameritrade-java-client-demo</name>
 	<url>https://github.com/studerw/td-ameritrade-java-client-demo</url>
 
-	<properties>
-		<start-class>com.studerw.tda.demo.WebApp</start-class>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<java.version>1.8</java.version>
-		<skipTests>false</skipTests>
-		<skipITs>false</skipITs>
-		<slf4j.version>1.7.26</slf4j.version>
-		<version.logback>1.2.3</version.logback>
-		<version.jackson>2.9.10</version.jackson>
-		<version.restdocs>2.0.4.RELEASE</version.restdocs>
-		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
-	</properties>
 
 	<dependencies>
 
@@ -87,19 +87,16 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${version.jackson}</version>
 		</dependency>
 
 		<!-- Validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.17.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
@@ -121,40 +118,48 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
+			<version>${version.slf4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
+			<version>${version.slf4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
+			<version>${version.slf4j}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${version.logback}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>${version.logback}</version>
+		</dependency>
+
+		<!-- docs -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${version.springfox}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${version.springfox}</version>
 		</dependency>
 
 		<!-- test -->
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>3.11.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -166,19 +171,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-core</artifactId>
-			<version>${version.restdocs}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<version>${version.restdocs}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -225,54 +217,6 @@
 							<descriptors>
 								<descriptor>src/main/assembly/zip.xml</descriptor>
 							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.6</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html</backend>
-							<doctype>book</doctype>
-							<attributes>
-								<snippets>${snippetsDirectory}</snippets>
-							</attributes>
-							<sourceDirectory>src/docs/asciidocs</sourceDirectory>
-							<outputDirectory>target/generated-docs</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.outputDirectory}/static/docs
-							</outputDirectory>
-							<resources>
-								<resource>
-									<directory>
-										${project.build.directory}/generated-docs
-									</directory>
-								</resource>
-							</resources>
 						</configuration>
 					</execution>
 				</executions>
