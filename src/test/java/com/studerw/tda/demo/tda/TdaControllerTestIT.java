@@ -15,14 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
 
-public class TdaControllerTest extends ControllerTest {
-	private static final Logger LOGGER = LoggerFactory.getLogger(TdaControllerTest.class);
+public class TdaControllerTestIT extends ControllerTest {
+	private static final Logger LOGGER = LoggerFactory.getLogger(TdaControllerTestIT.class);
 
 	@Test
 	public void shouldReturnQuotes() throws Exception {
 		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/quotes")
 			.accept(MediaType.APPLICATION_JSON)
-			.param("symbols", "msft", "vtsax", "s", "f"))
+			.param("symbols", "msft", "vtsax", "infy", "f"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$", hasSize(4)))
 			.andReturn();

@@ -34,16 +34,4 @@ public class WebAppTest {
 		assertThat(environment).isNotNull();
 		LOGGER.debug("testConfig...");
 	}
-
-	@Test
-	@Ignore
-	public void testTdaClient() {
-		final Quote quote = tdaClient.fetchQuote("msft");
-		assertThat(quote.getAssetType()).isEqualTo(AssetType.EQUITY);
-		assertThat(quote).isInstanceOf(EquityQuote.class);
-		assertThat(quote.getSymbol()).isEqualToIgnoringCase("msft");
-		EquityQuote equityQuote = (EquityQuote) quote;
-		assertThat(equityQuote).isNotNull();
-		assertThat(equityQuote.getAskPrice()).isGreaterThanOrEqualTo(BigDecimal.ONE);
-	}
 }

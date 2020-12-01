@@ -27,8 +27,8 @@ public class UserDetailsService implements org.springframework.security.core.use
 
 	private void initRoleMap() {
 		Map<String, List<String>> tempMap = new HashMap<>();
-		tempMap.put("tda-.*", Arrays.asList("ROLE_USER"));
-		tempMap.put("tda-admin.*", Arrays.asList("ROLE_ADMIN"));
+		tempMap.put("tda-.*", Collections.singletonList("ROLE_USER"));
+		tempMap.put("tda-admin.*", Arrays.asList("ROLE_USER", "ROLE_ADMIN"));
 		this.roleMap = Collections.unmodifiableMap(tempMap);
 	}
 

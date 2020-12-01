@@ -7,7 +7,6 @@ import com.studerw.tda.client.TdaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -15,8 +14,11 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class AppConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);
-
 	private Environment env;
+
+	public AppConfig(Environment env){
+		this.env = env;
+	}
 
 	@Bean
 	public TdaClient getTdaClient(Environment environment) {
@@ -32,11 +34,6 @@ public class AppConfig {
 		props.setProperty("tda.debug.bytes.length", this.env.getRequiredProperty("tda.debug.bytes.length"));
 		props.setProperty("tda.url", this.env.getRequiredProperty("tda.url"));
 		return props;
-	}
-
-	@Autowired
-	public void setEnvironment(Environment environment) {
-		this.env = environment;
 	}
 }
 

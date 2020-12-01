@@ -2,6 +2,7 @@ package com.studerw.tda.demo.mvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,12 +47,24 @@ public class ControllerTest {
 	}
 
 	@Test
-	public void errorTest() throws Exception {
+	public void testMissingParams() throws Exception {
 		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/quotes")
 			.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().is4xxClientError())
 			.andExpect(jsonPath("$.message").isNotEmpty())
 			.andReturn();
+
+		final MockHttpServletResponse response = mvcResult.getResponse();
+		LOGGER.debug(response.getContentAsString());
+	}
+
+	@Test
+	public void testPing() throws Exception {
+		final MvcResult mvcResult = this.mockMvc.perform(get(this.apiPrefix+"/tda/ping")
+				.accept(MediaType.TEXT_PLAIN_VALUE))
+				.andExpect(status().isOk())
+				.andExpect(content().string("pong"))
+				.andReturn();
 
 		final MockHttpServletResponse response = mvcResult.getResponse();
 		LOGGER.debug(response.getContentAsString());

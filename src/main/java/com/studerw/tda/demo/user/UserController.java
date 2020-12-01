@@ -4,10 +4,8 @@ import java.security.Principal;
 import java.util.Collection;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.studerw.tda.client.TdaClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import springfox.documentation.annotations.ApiIgnore;
 
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -34,8 +32,7 @@ public class UserController {
 
 
 	@GetMapping(value = "/whoami", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserPojo> whoami(@ApiIgnore Principal principal) {
-		LOGGER.info("[{}] - whoami", principal.getName());
+	public ResponseEntity<UserPojo> whoami() {
 		UserPojo userPojo = new UserPojo(SecurityContextHolder.getContext().getAuthentication());
 		return ResponseEntity.ok(userPojo);
 	}
