@@ -12,6 +12,14 @@ a custom web service built on top of the [TD-Ameritrade-Client for Java](https:/
 ## Build
 `mvn clean package`
 
+## Running in IDE or with Maven
+If you want to run for development purposes using e.g. `mvn spring-boot:run` or in your IDE, then you should copy the file _src/main/assembly/zip/config/application.properties_ to the _src/main/resources_ folder
+and modify any properties as needed. 
+
+If you then build the application and use the *zipped* version, then _application.properties_ file that ends up in the _config_ folder
+will override the properties that end up bundled in the jar from _src/main/resources_. See rules _14_ and _15_ in the [Spring Boot Externalized Configuration](https://docs.spring.io/spring-boot/docs/2.1.13.RELEASE/reference/html/boot-features-external-config.html) section of the manual
+for more info.
+
 ## Run
 The distro is located in _target_ folder as `td-ameritrade-java-client-demo-<version>.zip`
 
